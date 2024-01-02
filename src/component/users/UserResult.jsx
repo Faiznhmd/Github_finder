@@ -1,31 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useContext } from 'react';
 import Spinner from '../pages/Spinner';
+import UserItem from './UserItem';
+import GithubContext from '../../context/Github/GitHubContext';
+
 const UserResult = () => {
-  const [user, setUser] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { user, loading, fetchUsers } = useContext(GithubContext);
 
   useEffect(() => {
     fetchUsers();
   }, []);
 
-  const fetchUsers = async () => {
-    const response = await fetch(`${import.meta.env.VITE_GITHUB_URL}/users`, {
-      headers: {
-        Authorization: `token ${import.meta.env.VITE_GITHUB_TOKEN}`,
-      },
-    });
-    const data = await response.json();
-    setUser(data);
-    setLoading(false);
-  };
-
   //loading
 
   if (!loading) {
     return (
-      <div className="grid grid-cols-1 gap-8 xl:grid-cols-4 lg:grid:cols-3 md:grid:cols-2">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 md:grid-cols-2 xl:grid-cols-4 ">
         {user.map((user) => (
-          <h3 key={user}>{user.login}</h3>
+          <UserItem key={user.id} user={user} />
         ))}
       </div>
     );

@@ -1,12 +1,12 @@
 import UserResult from '../users/UserResult';
+import UserSearch from '../users/UserSearch';
 
 const Home = () => {
   return (
-    <div>
-      <h1>
-        <UserResult />
-      </h1>
-    </div>
+    <>
+      <UserSearch />
+      <UserResult />
+    </>
   );
 };
 

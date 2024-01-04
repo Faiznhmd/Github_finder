@@ -3,8 +3,8 @@ import GitHubReducer from './GitHubReducer';
 
 const GithubContext = createContext();
 
-// const GITHUB_URL = import.meta.env.VITE_GITHUB_URL;
-// const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
+const GITHUB_URL = import.meta.env.VITE_GITHUB_URL;
+const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 
 export const GithubProvider = ({ children }) => {
   const initialState = {
@@ -49,6 +49,7 @@ export const GithubProvider = ({ children }) => {
         },
       }
     );
+
     if (response.status === 404) {
       window.location = '/notFound';
     } else {
